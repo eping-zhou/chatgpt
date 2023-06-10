@@ -24,4 +24,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: your-dockerhub-username/yipingzhou:${{ github.sha }}
+          tags: 575b84264c4da743a408337405b501c590c43904bdc0f7aa26578b9c1e402a20/yipingzhou:${{ github.sha }}
