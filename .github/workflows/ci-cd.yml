@@ -24,4 +24,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: yipingzhou/575b84264c4da743a408337405b501c590c43904bdc0f7aa26578b9c1e402a20:${{ github.sha }}
+          tags: yipingzhou/chatgpt:${{ github.sha }}
