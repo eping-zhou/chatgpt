@@ -1,6 +1,6 @@
 import os
-
-directory = '/Users/yipingzhou/Chat-GPT'
+import pandas
+directory = '/workspaces/Chat-GPT'
 
 # Get all files in the directory
 files = os.listdir(directory)
