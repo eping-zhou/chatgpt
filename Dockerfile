@@ -1,5 +1,11 @@
 FROM ubuntu:20.04
 
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the project files to the container
+COPY . /app
+
 RUN apt update
 RUN apt -y upgrade
 
@@ -32,3 +38,8 @@ RUN mkdir /home/bert/.ssh
 
 RUN pip3 install xlrd
 RUN pip3 install jira
+RUN pip3 install requests beautifulsoup4
+
+# Set the default command to run the Python script
+CMD [ "python", "app.py" ]
+
