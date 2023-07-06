@@ -1,45 +1,22 @@
-FROM ubuntu:20.04
+# Base image with Python
+FROM python:3.9
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /app
 
-# Copy the project files to the container
-COPY . /app
+# Copy all Python files to the working directory
+COPY *.py ./
 
-RUN apt update
-RUN apt -y upgrade
+# Install required Python libraries
+RUN pip install --upgrade pip
+RUN pip install boto3   # AWS SDK for Python
+RUN pip install pandas 
+RUN pip install requests  # Library for making HTTP requests
+RUN pip install beautifulsoup4  # Library for web scraping
+RUN pip install psycopg2  # PostgreSQL adapter for Python
 
-RUN apt install -y curl gnupg2 p7zip-full
+# Set the entry point to receive the filename as an argument
+ENTRYPOINT ["python"]
 
-# optional: for unixODBC development headers
-RUN apt install unixodbc-dev -y
-RUN apt install -y python3-pip
-RUN apt install -y python3-pyodbc python3-setuptools build-essential
-RUN apt install -y gcc 
-
-RUN useradd --create-home --shell /bin/bash bert
-
-ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
-RUN pip3 install -U pip
-RUN pip3 install awscli boto3 openpyxl pyodbc requests_aws_sign pykeepass pysftp sqlparse pillow
-RUN pip3 install parameterized coverage
-RUN pip3 install XlsxWriter
-RUN pip3 install tableauserverclient PyPDF2 jinja2
-RUN pip3 install pymssql
-RUN pip3 install python-jenkins
-RUN pip3 install python-gitlab
-RUN pip3 install pandas
-RUN pip3 install msoffcrypto-tool
-
-RUN apt install git -y
-RUN apt install netcat -y
-RUN mkdir /home/bert/.ssh
-# ADD known_hosts /home/bert/.ssh/known_hosts
-
-RUN pip3 install xlrd
-RUN pip3 install jira
-RUN pip3 install requests beautifulsoup4
-
-# Set the default command to run the Python script
-CMD [ "python", "app.py" ]
-
+# Default command to run if no argument is provided
+CMD ["main.py"]
